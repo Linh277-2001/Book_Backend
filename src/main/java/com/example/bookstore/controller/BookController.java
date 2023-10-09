@@ -43,6 +43,7 @@ public class BookController {
     public Book insertBook(
             @RequestParam("name") String name,
             @RequestParam("description") String description,
+            @RequestParam("price") Long price,
             @RequestParam("categoryId") Integer categoryId,
             @RequestParam("image") MultipartFile image
     ) throws IOException {
@@ -63,6 +64,7 @@ public class BookController {
         Book book = new Book();
         book.setName(name);
         book.setDescription(description);
+//        book.setPrice(price);
         book.setCategory(category);
         book.setPhoto(image.getOriginalFilename());
         return bookRepository.save(book);
@@ -74,6 +76,7 @@ public class BookController {
             @PathVariable int id,
             @RequestParam("name") String name,
             @RequestParam("description") String description,
+//            @RequestParam("price") Long price,
             @RequestParam("categoryId") Integer categoryId,
             @RequestParam("image") MultipartFile image
     ) throws IOException {
@@ -100,6 +103,7 @@ public class BookController {
 
         existingBook.setName(name);
         existingBook.setDescription(description);
+//        existingBook.setPrice(price);
 
         Category category = new Category();
         category.setId(categoryId);

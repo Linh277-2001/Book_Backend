@@ -23,6 +23,6 @@ public class Book {
             referencedColumnName = "id"
     )
     private Category category;
-
+//    private Long price;
     private String photo;
 }
