@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class BookController {
         return bookRepository.findAll(sort);
     }
 
-//    @PostMapping
+    //    @PostMapping
 //    public Book insertBook(@RequestBody Book book){
 //        if(bookRepository.existsById(book.getId())) return null;
 //        return bookRepository.save(book);
@@ -43,7 +44,8 @@ public class BookController {
     public Book insertBook(
             @RequestParam("name") String name,
             @RequestParam("description") String description,
-            @RequestParam("price") Long price,
+//            @RequestParam("price") Long price,
+            @RequestParam("created") Date created,
             @RequestParam("categoryId") Integer categoryId,
             @RequestParam("image") MultipartFile image
     ) throws IOException {
@@ -65,6 +67,7 @@ public class BookController {
         book.setName(name);
         book.setDescription(description);
 //        book.setPrice(price);
+        book.setCreated(created);
         book.setCategory(category);
         book.setPhoto(image.getOriginalFilename());
         return bookRepository.save(book);
@@ -77,6 +80,7 @@ public class BookController {
             @RequestParam("name") String name,
             @RequestParam("description") String description,
 //            @RequestParam("price") Long price,
+            @RequestParam("created") Date created,
             @RequestParam("categoryId") Integer categoryId,
             @RequestParam("image") MultipartFile image
     ) throws IOException {
@@ -104,6 +108,7 @@ public class BookController {
         existingBook.setName(name);
         existingBook.setDescription(description);
 //        existingBook.setPrice(price);
+        existingBook.setCreated(created);
 
         Category category = new Category();
         category.setId(categoryId);
