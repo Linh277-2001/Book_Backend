@@ -209,4 +209,23 @@ public class UserSerVice {
             return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
         }
     }
+
+    //Bổ sung các service cho phần cart
+
+    public User saveUser(User user){
+        return userRepository.save(user);
+    }
+
+    public User saveUser2(String name, String email) {
+        User newUser = new User();
+        newUser.setEmail(email);
+        newUser.setName(name);
+        return userRepository.save(newUser);
+    }
+
+
+    public Integer isUserPresent(User user){
+        User user1 = userRepository.getUserByEmailAndName(user.getEmail(),user.getName());
+        return user1!=null ? user1.getId(): null ;
+    }
 }

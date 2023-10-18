@@ -4,19 +4,22 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.HashSet;
 import java.util.Set;
-
+@ToString
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "users",
-        uniqueConstraints = {
-        @UniqueConstraint(columnNames = "username"),
-        @UniqueConstraint(columnNames = "email")
-})
+@Table(name = "users"
+//        ,
+//        uniqueConstraints = {
+//                @UniqueConstraint(columnNames = "username"),
+//                @UniqueConstraint(columnNames = "email")
+//        }
+        )
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +47,12 @@ public class User {
     @Column(columnDefinition = "boolean default true") // Thêm mặc định status là true
     private Boolean status;
 
+
+    public User(String name, String email) {  //Có thể sửa thêm 1 đối tượng với các thuộc tính mặc định
+        this.name = name;
+        this.email = email;
+    }
+
     public User(String name,String username, String email, String password) {
         this.name=name;
         this.username = username;
@@ -58,4 +67,5 @@ public class User {
         this.avatar= avatar;
         this.status=status;
     }
+
 }

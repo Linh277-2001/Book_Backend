@@ -4,9 +4,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Date;
-
+@ToString
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,7 +26,22 @@ public class Book {
             referencedColumnName = "id"
     )
     private Category category;
-//    private Long price;
+    private Long price;
     private String photo;
     private Date created;
+    private int availableQuantity;
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", category=" + category +
+                ", price=" + price +
+                ", photo='" + photo + '\'' +
+                ", created=" + created +
+                ", availableQuantity=" + availableQuantity +
+                '}';
+    }
 }

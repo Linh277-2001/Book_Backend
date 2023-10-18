@@ -33,6 +33,10 @@ public class BookController {
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
         return bookRepository.findAll(sort);
     }
+    @GetMapping("/search")
+    public List<Book> findBooksByName(@RequestParam String name) {
+        return bookRepository.findByName(name);
+    }
 
     //    @PostMapping
 //    public Book insertBook(@RequestBody Book book){
@@ -44,7 +48,7 @@ public class BookController {
     public Book insertBook(
             @RequestParam("name") String name,
             @RequestParam("description") String description,
-//            @RequestParam("price") Long price,
+            @RequestParam("price") Long price,
             @RequestParam("created") Date created,
             @RequestParam("categoryId") Integer categoryId,
             @RequestParam("image") MultipartFile image
@@ -66,7 +70,7 @@ public class BookController {
         Book book = new Book();
         book.setName(name);
         book.setDescription(description);
-//        book.setPrice(price);
+        book.setPrice(price);
         book.setCreated(created);
         book.setCategory(category);
         book.setPhoto(image.getOriginalFilename());
@@ -79,7 +83,7 @@ public class BookController {
             @PathVariable int id,
             @RequestParam("name") String name,
             @RequestParam("description") String description,
-//            @RequestParam("price") Long price,
+            @RequestParam("price") Long price,
             @RequestParam("created") Date created,
             @RequestParam("categoryId") Integer categoryId,
             @RequestParam("image") MultipartFile image
@@ -107,7 +111,7 @@ public class BookController {
 
         existingBook.setName(name);
         existingBook.setDescription(description);
-//        existingBook.setPrice(price);
+        existingBook.setPrice(price);
         existingBook.setCreated(created);
 
         Category category = new Category();
