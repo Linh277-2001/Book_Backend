@@ -9,6 +9,7 @@ import com.example.bookstore.service.BookService;
 import com.example.bookstore.service.OrderService;
 import com.example.bookstore.service.UserSerVice;
 import com.example.bookstore.util.DateUtil;
+import jakarta.persistence.EntityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,21 @@ public class OrderController {
     private OrderService orderService;
     private BookService bookService;
     private UserSerVice userSerVice;
+
+    @Autowired
+    private EntityManager entityManager;
+
+    @GetMapping("/top5book")
+    public List<Object[]> getTop5Book() {
+        String query = "SELECT od.book_name, SUM(od.quantity) as total_quantity " +
+                "FROM order_detail od " +
+                "GROUP BY od.book_name " +
+                "ORDER BY total_quantity DESC " +
+                "LIMIT 5";
+
+        List<Object[]> results = entityManager.createNativeQuery(query).getResultList();
+        return results;
+    }
 
 
     public OrderController(OrderService orderService, BookService bookService, UserSerVice userSerVice) {

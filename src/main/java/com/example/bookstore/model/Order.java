@@ -32,7 +32,7 @@ public class Order {
     private String created;
 
 //    @ManyToOne
-//    @JoinColumn(name = "user_id")
+//    @JoinColumn(name = "user_id",referencedColumnName = "id")
 //    private User user;
 
 
