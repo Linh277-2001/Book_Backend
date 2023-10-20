@@ -22,6 +22,11 @@ public class OrderService {
         this.bookRepository = bookRepository;
     }
 
+    //Liệt kê tất cả order
+    public List<Order> getAllOrder(){
+        return this.orderRepository.findAll();
+    }
+
     public Order getOrderDetail(Long orderId) {
         Optional<Order> order = this.orderRepository.findById(orderId);
         return order.isPresent() ? order.get() : null;

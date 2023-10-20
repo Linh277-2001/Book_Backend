@@ -43,6 +43,11 @@ public class OrderController {
         return results;
     }
 
+    @GetMapping("/allorder")
+    public ResponseEntity<List<Order>> getAllOrder(){
+        return ResponseEntity.ok(orderService.getAllOrder());
+    }
+
 
     public OrderController(OrderService orderService, BookService bookService, UserSerVice userSerVice) {
         this.orderService = orderService;
